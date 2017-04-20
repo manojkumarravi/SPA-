@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<style>
+canvas {
+    border:1px solid #d3d3d3;
+    background-color: black;
+}
+</style>
+</head>
+<body>
+<script>
+
+var myGamePiece,mymusic;
+var frameno=0;
+function startGame() {
+                 mymusic=new music("Boss Theme.mp3");
+                 mymusic.play();
+                 myGamePiece = new component(40, 40, "BLUE", 10, 120);
+                 myEnemyComponent0=new component(50,50,"RED",430,0);
+                 myEnemyComponent1=new component(50,50,"RED",430,52); 
+                 myEnemyComponent2=new component(50,50,"RED",430,104);
+                 myEnemyComponent3=new component(50,50,"RED",430,156);
+                 myEnemyComponent4=new component(50,50,"RED",430,208);
+                 EnemyBullet0=new component(10,10,"YELLOW",420,15);
+                 EnemyBullet1=new component(10,10,"ORANGE",420,65);
+                 EnemyBullet2=new component(10,10,"CYAN",420,115);
+                 EnemyBullet3=new component(10,10,"ORANGE",420,165);
+                 EnemyBullet4=new component(10,10,"YELLOW",420,215);  
+                   myGameArea.start();
+}
+
+
+var myGameArea = {
+    canvas : document.createElement("canvas"),
+    start : function() {
+        this.canvas.width = 480;
+        this.canvas.height = 250;
+        this.context = this.canvas.getContext("2d");
+       document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+       this.interval = setInterval(updateGameArea, 20);
+    },
+     clear : function() {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    },
+     stop : function(){
+      clearInterval(this.interval);
+     }
+  
+   }
+
+function component(width, height, color, x, y) {
+    this.width = width;
+    this.height = height;
+       this.speedX = 0;
+    this.speedY = 0;
+    this.x = x;
+    this.y = y;  
+    this.update = function() {  
+    ctx = myGameArea.context;
+    ctx.fillStyle = color;
+    ctx.fillRect(this.x, this.y, this.width, this.height);
+       }
+      
+    this.crashWith = function(otherobj) {
+        var myleft = this.x;
+        var myright = this.x + (this.width);
+        var mytop = this.y;
+        var mybottom = this.y + (this.height);
+        var otherleft = otherobj.x;
+        var otherright = otherobj.x + (otherobj.width);
+        var othertop = otherobj.y;
+        var otherbottom = otherobj.y + (otherobj.height);
+        var crash = true;
+        if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
+            crash = false;
+              }
+        return crash;
+    }
+}
+
+function updateGameArea() {
+if (myGamePiece.crashWith(EnemyBullet0)||myGamePiece.crashWith(EnemyBullet1)||myGamePiece.crashWith(EnemyBullet2)||myGamePiece.crashWith(EnemyBullet3)||myGamePiece.crashWith(EnemyBullet4)) {
+        myGameArea.stop();
+        mymusic.stop();
+         frameno=0;
+}
+else{
+
+     myGameArea.clear();
+    
+    myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;   
+    myGamePiece.update();
+     
+    myEnemyComponent0.update();
+    EnemyBullet0.x+=-2;
+           if(EnemyBullet0.x<0)
+                   {
+          EnemyBullet0.x=420;
+                   }
+    EnemyBullet0.update();
+         EnemyBullet1.x+=-4;
+         if(EnemyBullet1.x<0)
+                 {
+                   EnemyBullet1.x=420;
+                 }
+    myEnemyComponent1.update();
+    EnemyBullet1.update();
+     
+     EnemyBullet2.x+=-2;
+        if(EnemyBullet2.x<0)
+           {
+             EnemyBullet2.x=420;
+           }
+     myEnemyComponent2.update();
+    EnemyBullet2.update();
+        EnemyBullet3.x+=-4.5;
+        if(EnemyBullet3.x<0)
+          {
+              EnemyBullet3.x=420;
+          }
+         
+    myEnemyComponent3.update();
+    EnemyBullet3.update();
+    EnemyBullet4.x+=-2.5;
+    if(EnemyBullet4.x<0)
+      {
+         EnemyBullet4.x=420;
+       }
+
+    myEnemyComponent4.update();
+    EnemyBullet4.update();
+   if(myGamePiece.x==0||myGamePiece.x==480||myGamePiece.y==0||myGamePiece.y==250)
+      {
+      myGameArea.stop();
+        mymusic.stop();
+         frameno=0;
+
+      }
+
+    
+     frameno+=1;
+     document.getElementById("demo").innerHTML=frameno;
+    
+}
+}
+function music(src) {
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+    this.play = function(){
+        this.sound.play();
+    }
+    this.stop = function(){
+        this.sound.pause();
+    }    
+}
+function moveup() {
+    myGamePiece.speedY -= 2; 
+}
+
+function movedown() {
+    myGamePiece.speedY += 2; 
+}
+
+function moveleft() {
+    myGamePiece.speedX -= 2; 
+}
+
+function moveright() {
+    myGamePiece.speedX += 2; 
+}
+function clearmove() {
+    myGamePiece.speedX = 0; 
+    myGamePiece.speedY = 0; 
+}
+</script>
+<div style="text-align:center;width:480px;">
+  <button onmousedown="moveup()" onmouseup="clearmove()" ontouchstart="moveup()">UP</button><br><br>
+  <button onmousedown="moveleft()" onmouseup="clearmove()" ontouchstart="moveleft()">LEFT</button>
+  <button onmousedown="moveright()" onmouseup="clearmove()" ontouchstart="moveright()">RIGHT</button><br><br>
+  <button onmousedown="movedown()" onmouseup="clearmove()" ontouchstart="movedown()">DOWN</button>
+</div>
+<h1>score:</h1>
+<p id="demo"></p>
+<p>YOUR GAME AREA</p>
+<button onclick="startGame()">start</button>
+</body>
+</html>
