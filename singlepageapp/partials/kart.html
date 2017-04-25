@@ -1,0 +1,20 @@
+
+<div id="BookList">
+<p>click buy to get the book</p>
+<p>only limited offers</p>
+    
+	<ul class="list-unstyled">
+	    <li class="book" 
+		style="background: #ffffff url({{book.img}}) no-repeat"
+		  ng-repeat="book in kart">
+		  <div class="book-details clearfix">
+		  <h3>NAME:{{book.name |uppercase}}</h3>
+		  <p>AUTHOR:{{book.author|uppercase}}</p>
+		  <p>PRICE:{{book.price | currency:'Rs.'}}</p>
+		  <p>{{book.details|uppercase}}</p>
+		  <button class="btn btn-info pull-right" ng-click="buy(book)">BUY</button>
+		   
+		  </div>  
+		  </li>
+		  </ul>
+</div>  

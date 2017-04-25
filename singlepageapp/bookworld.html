@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+   <meta charset="Utf-8">
+   <title>welcome to bookworld</title>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+   <link rel="stylesheet" href="appstyle.css"/>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
+
+   <script src="app.js" ></script>
+ </head>
+ <body>
+   <div id="header-wrapper" ng-controller="HeaderCtrl">
+    <span class="logo pull-left"> {{appDetails.title}} </span>
+	<span class="tagline pull-left"> {{appDetails.tagline}} </span>
+	<div class="nav-wrapper pull-left">
+	    <ul class="nav nav-pills">
+		 <li class="active"><a href="#/books">BOOKS</a></li>
+	     <li> <a href="#/kart">KART</a></li>
+		</ul>
+	</div>
+</div>
+<div ng-view class="container"></div>
+</body>
+</html>

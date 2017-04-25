@@ -1,0 +1,23 @@
+
+<div id="BookList">
+    <form role="form">
+	<div class="form-group">
+	<input type="text" class="form-control" placeholder="search..." ng-model="search"/>
+	</div>
+	</form>
+	<div>
+	<ul class="list-unstyled">
+	    <li class="book" 
+		style="background: #ffffff url({{book.img}}) no-repeat"
+		  ng-repeat="book in books | filter:search">
+		  <div class="book-details clearfix">
+		  <h3>NAME:{{book.name |uppercase}}</h3>
+		  <p>AUTHOR:{{book.author|uppercase}}</p>
+		  <p>PRICE:{{book.price | currency:'RS.'}}</p>
+		  <p>{{book.details|uppercase}}</p>
+		  <button class="btn btn-info pull-right" ng-click="addtokart(book)">ADD TO KART</button>
+		  </div>  
+		  </li>
+		  </ul>
+</div>  
+</div>

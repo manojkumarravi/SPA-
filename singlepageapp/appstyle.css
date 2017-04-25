@@ -1,0 +1,48 @@
+#header-wrapper{
+    width:100%;
+}
+
+.logo {
+         padding: 10px;
+         margin-right:10px;
+         font-size:35px;
+         }
+.tagline{
+         font-size: 10px;
+         margin-top: 50px;
+         margin-left: -200px;
+        }
+.nav-wrapper {
+       margin-left: 100px;
+       margin-top:15px;
+  }
+#BookList{
+	 width:100%;
+	 padding:10px;
+	 border:10px;
+}
+#BookList input{
+	width:25%;
+	}
+	#BookList .book{
+		border:1px solid gray;
+		padding:10px;
+		margin-bottom:40px;
+		margin-top:30px;
+		 
+	}
+#BookList .book .book-details{
+	
+	 margin-left: 180px;
+	 margin-top: 80px;
+}
+.container.ng-enter{
+	-webkit-transition:0.5s linear all;
+	-moz-transition:0.5s linear all;
+	-o-transition:0.5s linear all;
+	transition:0.5s linear all;
+	opacity:0;
+}
+.container.ng-enter-active{
+	opacity:1;
+}
